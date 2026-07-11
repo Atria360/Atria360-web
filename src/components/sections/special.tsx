@@ -20,7 +20,12 @@ const CAT_BADGES: Record<string, string> = {
 
 /** Dynamic blog grid pulling published posts from Supabase */
 export async function BlogGrid({ content }: { content: Json }) {
-  const c = content as { showFeatured?: boolean; categories?: string[] };
+  const c = content as {
+    showFeatured?: boolean;
+    featuredLabel?: string;
+    readLabel?: string;
+    emptyText?: string;
+  };
   const posts = await getBlogPosts();
   const featured = c.showFeatured !== false ? posts.find((p) => p.featured) : undefined;
   const rest = posts.filter((p) => p.id !== featured?.id);
@@ -31,7 +36,7 @@ export async function BlogGrid({ content }: { content: Json }) {
         {featured && (
           <>
             <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-accent mb-8 flex items-center gap-2">
-              <Star className="w-4 h-4" /> Featured Article
+              <Star className="w-4 h-4" /> {c.featuredLabel ?? "Featured Article"}
             </h2>
             <Link
               href={`/blog/${featured.slug}`}
@@ -68,7 +73,7 @@ export async function BlogGrid({ content }: { content: Json }) {
                     {fmtDate(featured.published_at)}
                   </div>
                   <span className="text-secondary font-bold flex items-center gap-2">
-                    Read Article <ArrowRight className="w-4 h-4" />
+                    {c.readLabel ?? "Read Article"} <ArrowRight className="w-4 h-4" />
                   </span>
                 </div>
               </div>
@@ -115,7 +120,9 @@ export async function BlogGrid({ content }: { content: Json }) {
           ))}
         </div>
         {posts.length === 0 && (
-          <p className="text-center text-gray-500 py-16">No articles published yet — check back soon.</p>
+          <p className="text-center text-gray-500 py-16">
+            {c.emptyText ?? "No articles published yet — check back soon."}
+          </p>
         )}
       </div>
     </section>

@@ -9,9 +9,11 @@ import type { SiteSettings } from "@/lib/types";
 
 const FIELDS: Field[] = [
   { key: "site_name", label: "Site name", type: "text" },
-  { key: "tagline", label: "Tagline", type: "text" },
+  { key: "tagline", label: "Tagline (used in browser title)", type: "text" },
+  { key: "meta_description", label: "Default SEO meta description", type: "textarea" },
   { key: "logo_url", label: "Logo URL", type: "image" },
   { key: "footer_description", label: "Footer description", type: "textarea" },
+  { key: "contact_heading", label: "Footer contact column title", type: "text" },
   { key: "email", label: "Contact email", type: "text" },
   { key: "phone", label: "Phone (tel: format, e.g. +14035550123)", type: "text" },
   { key: "phone_display", label: "Phone (display)", type: "text" },

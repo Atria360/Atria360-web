@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import BrandIcon from "@/components/BrandIcon";
 import Icon from "@/components/Icon";
 import Link from "next/link";
@@ -144,8 +145,8 @@ export function ComparisonTable({ content }: { content: Json }) {
             </thead>
             <tbody>
               {(c.groups ?? []).map((g, gi) => (
-                <>
-                  <tr key={`g${gi}`} className="bg-white/5">
+                <Fragment key={gi}>
+                  <tr className="bg-white/5">
                     <td colSpan={(c.columns?.length ?? 3) + 1} className="py-3 px-4 font-bold text-white uppercase tracking-widest text-xs">
                       {g.name}
                     </td>
@@ -160,7 +161,7 @@ export function ComparisonTable({ content }: { content: Json }) {
                       ))}
                     </tr>
                   ))}
-                </>
+                </Fragment>
               ))}
             </tbody>
           </table>

@@ -60,7 +60,7 @@ export default function Footer({
 
           <div>
             <h4 className="text-white font-bold mb-6 sm:mb-8 text-xs sm:text-sm uppercase tracking-widest">
-              Contact
+              {settings.contact_heading}
             </h4>
             <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base font-medium">
               <li>

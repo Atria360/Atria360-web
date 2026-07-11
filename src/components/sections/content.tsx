@@ -223,20 +223,22 @@ export function Testimonials({ content }: { content: Json }) {
           <blockquote className={`text-2xl sm:text-3xl font-medium leading-relaxed mb-10 ${dark ? "text-white" : "text-primary"}`}>
             &ldquo;{q.quote}&rdquo;
           </blockquote>
-          <div className="flex items-center justify-center gap-4">
-            {q.image ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={q.image} alt={q.name ?? ""} className="w-14 h-14 rounded-full object-cover" />
-            ) : (
-              <div className="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center font-bold">
-                {q.initials}
+          {(q.name || q.initials || q.image) && (
+            <div className="flex items-center justify-center gap-4">
+              {q.image ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={q.image} alt={q.name ?? ""} className="w-14 h-14 rounded-full object-cover" />
+              ) : (
+                <div className="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center font-bold">
+                  {q.initials}
+                </div>
+              )}
+              <div className="text-left">
+                <div className={`font-bold ${dark ? "text-white" : "text-primary"}`}>{q.name}</div>
+                <div className={dark ? "text-gray-400" : "text-gray-500"}>{q.role}</div>
               </div>
-            )}
-            <div className="text-left">
-              <div className={`font-bold ${dark ? "text-white" : "text-primary"}`}>{q.name}</div>
-              <div className={dark ? "text-gray-400" : "text-gray-500"}>{q.role}</div>
             </div>
-          </div>
+          )}
         </div>
       </section>
     );

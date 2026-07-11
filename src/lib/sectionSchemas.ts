@@ -205,6 +205,25 @@ export const SECTION_SCHEMAS: Record<string, SectionSchema> = {
       },
     ],
   },
+  pillGrid: {
+    label: "Pill Grid",
+    description: "Compact icon pills — great for 'Industries We Serve' strips",
+    fields: [
+      { key: "heading", label: "Heading", type: "textarea", help: HEADING_HELP },
+      { key: "sub", label: "Subheading", type: "textarea" },
+      theme(),
+      {
+        key: "pills",
+        label: "Pills",
+        type: "list",
+        fields: [
+          { key: "icon", label: "Icon", type: "icon" },
+          { key: "label", label: "Label", type: "text" },
+          color(),
+        ],
+      },
+    ],
+  },
   industryLinks: {
     label: "Industry Link List",
     description: "Home page industry links with big heading",
@@ -699,7 +718,12 @@ export const SECTION_SCHEMAS: Record<string, SectionSchema> = {
   blogGrid: {
     label: "Blog Grid",
     description: "Dynamic grid of published blog posts",
-    fields: [{ key: "showFeatured", label: "Show featured article", type: "boolean" }],
+    fields: [
+      { key: "showFeatured", label: "Show featured article", type: "boolean" },
+      { key: "featuredLabel", label: "Featured badge label", type: "text" },
+      { key: "readLabel", label: "Read link label", type: "text" },
+      { key: "emptyText", label: "Empty state text", type: "text" },
+    ],
   },
   pressFeatured: {
     label: "Press — Featured Story",

@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
+import { getSiteSettings } from "@/lib/cms";
 import "./globals.css";
 
-export const metadata: Metadata = {
-  title: "Atria360 | Smarter Systems From Every Angle",
-  description:
-    "Atria360 unifies IT infrastructure, custom software, and operations intelligence into one connected ecosystem.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const s = await getSiteSettings();
+  return {
+    title: `${s.site_name} | ${s.tagline}`,
+    description: s.meta_description || s.footer_description,
+    icons: s.logo_url ? { icon: s.logo_url } : undefined,
+  };
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

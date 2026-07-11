@@ -66,8 +66,10 @@ export interface FooterColumn {
 export interface SiteSettings {
   site_name: string;
   tagline: string;
+  meta_description: string;
   logo_url: string;
   footer_description: string;
+  contact_heading: string;
   email: string;
   phone: string;
   phone_display: string;

@@ -274,6 +274,42 @@ export function IndustryCards({ content }: { content: Json }) {
   );
 }
 
+/** Compact icon pill grid — "Industries We Serve" style strips */
+export function PillGrid({ content }: { content: Json }) {
+  const c = content as {
+    heading?: string;
+    sub?: string;
+    theme?: string;
+    pills?: { icon?: string; label?: string; color?: string }[];
+  };
+  const dark = isDark(c.theme);
+  return (
+    <section className={`py-16 md:py-20 px-4 sm:px-6 ${THEME_BG[c.theme ?? "white"]}`}>
+      <div className="container mx-auto text-center">
+        <SectionHeading heading={c.heading} sub={c.sub} center dark={dark} />
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 max-w-5xl mx-auto">
+          {(c.pills ?? []).map((p, i) => {
+            const a = accent(p.color, ["cyan", "orange", "gold", "teal"][i % 4]);
+            return (
+              <div
+                key={i}
+                className={`flex items-center gap-2.5 px-5 py-3 rounded-full border font-semibold text-sm sm:text-base transition-all hover:-translate-y-0.5 ${
+                  dark
+                    ? "bg-white/5 border-white/10 text-white hover:border-secondary"
+                    : "bg-white border-gray-200 text-primary shadow-sm hover:border-secondary hover:shadow-md"
+                }`}
+              >
+                <Icon name={p.icon} className={`w-4 h-4 sm:w-5 sm:h-5 ${a.text}`} />
+                {p.label}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /** Home page industries link list */
 export function IndustryLinks({ content }: { content: Json }) {
   const c = content as {

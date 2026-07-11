@@ -60,11 +60,18 @@ export default function BlogEditor({ post }: { post?: BlogPost }) {
           </div>
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-1.5">Category</label>
-            <select value={form.category} onChange={(e) => set("category", e.target.value)} className={input}>
+            <input
+              value={form.category}
+              onChange={(e) => set("category", e.target.value)}
+              list="blog-categories"
+              className={input}
+              placeholder="e.g. Operations"
+            />
+            <datalist id="blog-categories">
               {["Operations", "Technology", "Healthcare", "Automation", "Company News"].map((c) => (
-                <option key={c}>{c}</option>
+                <option key={c} value={c} />
               ))}
-            </select>
+            </datalist>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

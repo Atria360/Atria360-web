@@ -1,7 +1,7 @@
 import type { ComponentType } from "react";
 import type { Json, Section } from "@/lib/types";
 import { HeroHome, HeroPage } from "./heroes";
-import { CardCarousel, IconCards, IndustryCards, IndustryLinks, ProductShowcase } from "./cards";
+import { CardCarousel, IconCards, IndustryCards, IndustryLinks, PillGrid, ProductShowcase } from "./cards";
 import { ChecklistGroups, ImageTiles, MissionVision, ProductDetail, SplitFeature } from "./features";
 import { CtaBanner, ProcessSteps, RichText, StatsBar, TeamCards, Testimonials, Timeline } from "./content";
 import { BadgeStrip, CaseStudies, ComparisonTable, LogoGrid, PricingTiers, SpecPanels } from "./commerce";
@@ -27,6 +27,7 @@ export const SECTION_REGISTRY: Record<string, ComponentType<{ content: Json }>> 
   productShowcase: ProductShowcase,
   industryCards: IndustryCards,
   industryLinks: IndustryLinks,
+  pillGrid: PillGrid,
   splitFeature: SplitFeature,
   checklistGroups: ChecklistGroups,
   productDetail: ProductDetail,
