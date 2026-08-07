@@ -25,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap"
           rel="stylesheet"
         />
+        <meta name='impact-site-verification' value='4d741a3b-bb50-4ef6-afb1-c1acf457e6f9'>
       </head>
       <body>{children}</body>
     </html>
