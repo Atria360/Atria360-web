@@ -11,10 +11,20 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const settings = await getSiteSettings();
+
   return (
     <html lang="en">
       <head>
+        {/* Site-verification / custom meta tags managed in Admin → Settings.
+            Some services (e.g. Impact) use a nonstandard `value` attribute. */}
+        {(settings.head_meta_tags ?? []).map((t, i) => {
+          const props: Record<string, string> = { name: t.name };
+          if (t.content) props.content = t.content;
+          if (t.value) props.value = t.value;
+          return <meta key={`${t.name}-${i}`} {...props} />;
+        })}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

@@ -79,4 +79,5 @@ export interface SiteSettings {
   cta_href: string;
   copyright: string;
   legal_links: { label: string; href: string }[];
+  head_meta_tags: { name: string; content?: string; value?: string }[];
 }

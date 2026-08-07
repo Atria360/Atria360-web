@@ -40,6 +40,16 @@ const FIELDS: Field[] = [
       { key: "href", label: "URL", type: "text" },
     ],
   },
+  {
+    key: "head_meta_tags",
+    label: "Head meta tags (site verification: Semrush/Impact, Google, Bing...)",
+    type: "list",
+    fields: [
+      { key: "name", label: "Meta name", type: "text" },
+      { key: "content", label: "Content attribute", type: "text" },
+      { key: "value", label: "Value attribute (used by Impact)", type: "text" },
+    ],
+  },
 ];
 
 export default function SettingsEditor({ initial }: { initial: SiteSettings }) {

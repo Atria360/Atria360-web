@@ -19,6 +19,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   cta_href: "/contact",
   copyright: "© 2026 Atria360. All rights reserved.",
   legal_links: [],
+  head_meta_tags: [],
 };
 
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -44,28 +45,36 @@ export async function getNavigation(menu: "header" | "footer"): Promise<{
   }
 }
 
+// PostgREST reports "no rows matched" for .single() with this code. Anything
+// else (network failure, auth, timeout) is an infrastructure problem, and must
+// surface as a 5xx rather than a 404 — a 404 carries noindex and would
+// deindex live pages during a transient outage.
+const NO_ROWS = "PGRST116";
+
 export async function getPageWithSections(
   slug: string
 ): Promise<{ page: Page; sections: Section[] } | null> {
-  try {
-    const supabase = await createClient();
-    const { data: page } = await supabase
-      .from("pages")
-      .select("*")
-      .eq("slug", slug)
-      .eq("published", true)
-      .single();
-    if (!page) return null;
-    const { data: sections } = await supabase
-      .from("sections")
-      .select("*")
-      .eq("page_id", page.id)
-      .eq("visible", true)
-      .order("sort_order");
-    return { page: page as Page, sections: (sections as Section[]) ?? [] };
-  } catch {
-    return null;
+  const supabase = await createClient();
+  const { data: page, error } = await supabase
+    .from("pages")
+    .select("*")
+    .eq("slug", slug)
+    .eq("published", true)
+    .single();
+
+  if (error) {
+    if (error.code === NO_ROWS) return null;
+    throw new Error(`Failed to load page "${slug}": ${error.message}`);
   }
+  if (!page) return null;
+
+  const { data: sections } = await supabase
+    .from("sections")
+    .select("*")
+    .eq("page_id", page.id)
+    .eq("visible", true)
+    .order("sort_order");
+  return { page: page as Page, sections: (sections as Section[]) ?? [] };
 }
 
 export async function getAllPageSlugs(): Promise<string[]> {
@@ -95,16 +104,17 @@ export async function getBlogPosts(opts?: { limit?: number }): Promise<BlogPost[
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  try {
-    const supabase = await createClient();
-    const { data } = await supabase
-      .from("blog_posts")
-      .select("*")
-      .eq("slug", slug)
-      .eq("published", true)
-      .single();
-    return (data as BlogPost) ?? null;
-  } catch {
-    return null;
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("blog_posts")
+    .select("*")
+    .eq("slug", slug)
+    .eq("published", true)
+    .single();
+
+  if (error) {
+    if (error.code === NO_ROWS) return null;
+    throw new Error(`Failed to load post "${slug}": ${error.message}`);
   }
+  return (data as BlogPost) ?? null;
 }
