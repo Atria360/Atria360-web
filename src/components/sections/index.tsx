@@ -6,6 +6,7 @@ import { ChecklistGroups, ImageTiles, MissionVision, ProductDetail, SplitFeature
 import { CtaBanner, ProcessSteps, RichText, StatsBar, TeamCards, Testimonials, Timeline } from "./content";
 import { BadgeStrip, CaseStudies, ComparisonTable, LogoGrid, PricingTiers, SpecPanels } from "./commerce";
 import { ContactSection, FaqAccordion, FaqTabs, Newsletter } from "./interactive";
+import { NoteBlock } from "./notes";
 import {
   ArchitectureFlow,
   BlogGrid,
@@ -58,6 +59,7 @@ export const SECTION_REGISTRY: Record<string, ComponentType<{ content: Json }>> 
   mediaContact: MediaContact,
   devDocs: DevDocs,
   architectureFlow: ArchitectureFlow,
+  noteBlock: NoteBlock,
 };
 
 export function SectionRenderer({ sections }: { sections: Section[] }) {
@@ -66,7 +68,20 @@ export function SectionRenderer({ sections }: { sections: Section[] }) {
       {sections.map((section) => {
         const Cmp = SECTION_REGISTRY[section.type];
         if (!Cmp) return null;
-        return <Cmp key={section.id} content={section.content} />;
+        // An `anchor` on any section makes it a deep-link target, so nav
+        // sub-items can point at /services/custom-signage#permits.
+        // scroll-mt clears the fixed header.
+        const anchor = typeof section.content?.anchor === "string" ? section.content.anchor : "";
+        const rendered = <Cmp content={section.content} />;
+        return anchor ? (
+          <div key={section.id} id={anchor} className="scroll-mt-28">
+            {rendered}
+          </div>
+        ) : (
+          <span key={section.id} className="contents">
+            {rendered}
+          </span>
+        );
       })}
     </>
   );

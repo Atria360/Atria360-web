@@ -422,12 +422,14 @@ export function ArchitectureFlow({ content }: { content: Json }) {
     nodes?: { icon?: string; color?: string; title?: string; text?: string }[];
   };
   return (
-    <section className="py-16 md:py-24 bg-[#0a0a0a] text-white px-4 sm:px-6 overflow-hidden">
+    <section className="py-16 md:py-24 bg-[#0a0a0a] text-white px-4 sm:px-6">
       <div className="container mx-auto text-center">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-10 md:mb-16 text-secondary reveal-item">
           {renderMarkedText(c.heading)}
         </h2>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
+        {/* Scrolls rather than clipping when a flow has more nodes than fit. */}
+        <div className="md:overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+        <div className="flex flex-col md:flex-row items-center md:justify-center gap-4 md:gap-6 md:min-w-max">
           {(c.nodes ?? []).map((n, i) => (
             <div key={i} className="contents">
               <div className="bg-white/5 border border-white/10 rounded-2xl p-8 w-full md:w-auto md:min-w-[200px]">
@@ -440,6 +442,7 @@ export function ArchitectureFlow({ content }: { content: Json }) {
               )}
             </div>
           ))}
+        </div>
         </div>
         {c.footnote && <p className="text-gray-400 max-w-3xl mx-auto mt-12">{c.footnote}</p>}
       </div>

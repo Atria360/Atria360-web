@@ -840,6 +840,17 @@ export const SECTION_SCHEMAS: Record<string, SectionSchema> = {
       },
     ],
   },
+  noteBlock: {
+    label: "Note / Disclaimer",
+    description: "Small print for regulatory, licensing and fee disclaimers",
+    fields: [
+      { key: "heading", label: "Heading (optional)", type: "text" },
+      { key: "icon", label: "Icon", type: "icon" },
+      { key: "notes", label: "Notes (one per line)", type: "strings" },
+      { key: "tone", label: "Tone", type: "select", options: ["neutral", "info", "warning"] },
+      theme(["white", "light", "gray"]),
+    ],
+  },
   architectureFlow: {
     label: "Architecture Flow",
     description: "Node → node → node architecture diagram",
@@ -860,5 +871,19 @@ export const SECTION_SCHEMAS: Record<string, SectionSchema> = {
     ],
   },
 };
+
+// Any section can carry an `anchor` so grouped nav items can deep-link into a
+// page (e.g. Signage > Sign Permits -> /services/custom-signage#permits).
+// Appended once here rather than repeated across every schema.
+const ANCHOR_FIELD: Field = {
+  key: "anchor",
+  label: "Anchor ID (for nav deep links)",
+  type: "text",
+  help: "Lowercase, no spaces — 'permits' makes this section /page#permits",
+};
+
+for (const schema of Object.values(SECTION_SCHEMAS)) {
+  if (!schema.fields.some((f) => f.key === "anchor")) schema.fields.push(ANCHOR_FIELD);
+}
 
 export const SECTION_TYPES = Object.keys(SECTION_SCHEMAS);

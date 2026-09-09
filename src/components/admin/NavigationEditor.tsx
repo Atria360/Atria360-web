@@ -7,6 +7,9 @@ import { saveNavigation } from "@/app/actions/admin";
 import type { Field } from "@/lib/sectionSchemas";
 import type { Json } from "@/lib/types";
 
+// Three levels: top item > group > link. A group that has its own links
+// becomes a column heading in the header's mega-menu; a group with no links
+// of its own renders as a plain link, so both shapes stay editable here.
 const HEADER_FIELDS: Field[] = [
   {
     key: "items",
@@ -17,11 +20,21 @@ const HEADER_FIELDS: Field[] = [
       { key: "href", label: "URL", type: "text" },
       {
         key: "children",
-        label: "Dropdown items",
+        label: "Dropdown groups",
         type: "list",
+        help: "Add links inside a group to make it a mega-menu column. Leave a group's own links empty to render it as a single link.",
         fields: [
-          { key: "label", label: "Label", type: "text" },
-          { key: "href", label: "URL", type: "text" },
+          { key: "label", label: "Group label", type: "text" },
+          { key: "href", label: "Group URL", type: "text" },
+          {
+            key: "children",
+            label: "Links in this group",
+            type: "list",
+            fields: [
+              { key: "label", label: "Label", type: "text" },
+              { key: "href", label: "URL", type: "text" },
+            ],
+          },
         ],
       },
     ],

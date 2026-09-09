@@ -52,10 +52,13 @@ export interface Lead {
   created_at: string;
 }
 
+// Recursive so the header can carry grouped menus:
+// Services > Technology > IT Infrastructure. A child that itself has
+// children is rendered as a column heading in the mega-menu panel.
 export interface NavItem {
   label: string;
   href: string;
-  children?: { label: string; href: string }[];
+  children?: NavItem[];
 }
 
 export interface FooterColumn {
