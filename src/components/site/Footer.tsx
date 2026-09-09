@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Icon from "@/components/Icon";
+import Logo from "@/components/site/Logo";
 import type { FooterColumn, SiteSettings } from "@/lib/types";
 
 export default function Footer({
@@ -14,21 +15,10 @@ export default function Footer({
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-12 sm:mb-16">
           <div>
-            <Link href="/" className="flex items-center gap-3 mb-6 sm:mb-8 w-fit">
+            <Link href="/" className="flex items-center mb-6 sm:mb-8 w-fit">
               {/* Reversed lockup on this near-black background; the light
                   logo's dark wordmark would be near-invisible here. */}
-              {settings.logo_url_dark || settings.logo_url ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={settings.logo_url_dark || settings.logo_url}
-                  alt={`${settings.site_name} Logo`}
-                  className="h-12 w-auto"
-                />
-              ) : (
-                <span className="font-header font-extrabold text-xl text-white">
-                  {settings.site_name}
-                </span>
-              )}
+              <Logo settings={settings} height={44} variant="dark" />
             </Link>
             <p className="mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed">
               {settings.footer_description}
