@@ -70,7 +70,13 @@ export interface SiteSettings {
   site_name: string;
   tagline: string;
   meta_description: string;
+  // Full lockup for light backgrounds (header, mobile drawer).
   logo_url: string;
+  // White/reversed lockup for dark backgrounds (footer). Falls back to logo_url.
+  logo_url_dark: string;
+  // Icon mark only — used as the browser favicon and touch icon, where the
+  // wide lockup would be illegible.
+  favicon_url: string;
   footer_description: string;
   contact_heading: string;
   email: string;

@@ -7,6 +7,8 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   meta_description:
     "Atria360 unifies IT infrastructure, custom software, and operations intelligence into one connected ecosystem.",
   logo_url: "",
+  logo_url_dark: "",
+  favicon_url: "",
   contact_heading: "Contact",
   footer_description:
     "Modernizing businesses through intelligent operational ecosystems powered by automation and secure infrastructure.",

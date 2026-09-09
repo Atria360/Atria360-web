@@ -15,9 +15,15 @@ export default function Footer({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-12 sm:mb-16">
           <div>
             <Link href="/" className="flex items-center gap-3 mb-6 sm:mb-8 w-fit">
-              {settings.logo_url ? (
+              {/* Reversed lockup on this near-black background; the light
+                  logo's dark wordmark would be near-invisible here. */}
+              {settings.logo_url_dark || settings.logo_url ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={settings.logo_url} alt={`${settings.site_name} Logo`} className="h-10 w-auto" />
+                <img
+                  src={settings.logo_url_dark || settings.logo_url}
+                  alt={`${settings.site_name} Logo`}
+                  className="h-12 w-auto"
+                />
               ) : (
                 <span className="font-header font-extrabold text-xl text-white">
                   {settings.site_name}

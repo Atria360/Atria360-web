@@ -7,7 +7,12 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `${s.site_name} | ${s.tagline}`,
     description: s.meta_description || s.footer_description,
-    icons: s.logo_url ? { icon: s.logo_url } : undefined,
+    // The icon mark, not the wide lockup — a wordmark is unreadable at 16px.
+    icons: s.favicon_url
+      ? { icon: s.favicon_url, apple: s.favicon_url }
+      : s.logo_url
+        ? { icon: s.logo_url }
+        : undefined,
   };
 }
 
