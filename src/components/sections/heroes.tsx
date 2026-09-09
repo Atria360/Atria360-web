@@ -13,7 +13,7 @@ export function HeroHome({ content }: { content: Json }) {
     chips?: { icon?: string; label?: string; color?: string }[];
   };
   return (
-    <section className="hero-bg min-h-screen flex items-center pt-16 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-6 -mt-[72px]">
+    <section className="hero-bg min-h-screen flex items-center pt-16 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-6 -mt-[var(--header-h)]">
       <div className="blob blob-1" />
       <div className="blob blob-2" />
       <div className="blob blob-3" />
@@ -84,7 +84,7 @@ export function HeroPage({ content }: { content: Json }) {
   const center = c.align === "center";
   return (
     <section
-      className={`hero-bg pt-16 pb-16 md:pb-24 px-4 sm:px-6 relative -mt-[72px] ${
+      className={`hero-bg pt-16 pb-16 md:pb-24 px-4 sm:px-6 relative -mt-[var(--header-h)] ${
         c.minHeight === "screen" ? "min-h-screen flex items-center" : ""
       }`}
     >

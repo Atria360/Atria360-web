@@ -10,6 +10,10 @@
   --dark: #0a0a0a;
   --darker: #1a1a1a;
   --light: #f9fafb;
+  /* Height of the fixed header. The header sets it, main offsets content by
+     it, and heroes pull up by it — so it must be defined in exactly one
+     place or content ends up sitting underneath the header. */
+  --header-h: 84px;
 }
 
 html {

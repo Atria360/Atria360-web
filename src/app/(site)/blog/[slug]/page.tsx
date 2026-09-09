@@ -59,7 +59,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
-      <section className="hero-bg pt-16 pb-16 md:pb-20 px-4 sm:px-6 -mt-[72px]">
+      <section className="hero-bg pt-16 pb-16 md:pb-20 px-4 sm:px-6 -mt-[var(--header-h)]">
         <div className="blob blob-1" />
         <div className="container mx-auto max-w-4xl relative z-10 pt-28 md:pt-36">
           <Link href="/blog" className="inline-flex items-center gap-2 text-white/70 hover:text-white mb-8 transition-colors">

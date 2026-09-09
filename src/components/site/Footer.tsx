@@ -18,7 +18,7 @@ export default function Footer({
             <Link href="/" className="flex items-center mb-6 sm:mb-8 w-fit">
               {/* Reversed lockup on this near-black background; the light
                   logo's dark wordmark would be near-invisible here. */}
-              <Logo settings={settings} height={44} variant="dark" />
+              <Logo settings={settings} height={62} variant="dark" />
             </Link>
             <p className="mb-6 sm:mb-8 text-sm sm:text-base leading-relaxed">
               {settings.footer_description}

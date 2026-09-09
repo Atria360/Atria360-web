@@ -37,15 +37,14 @@ export default function Header({
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300">
-      {/* relative: the mega-menu panel anchors to this container, not to its
-          trigger, so a wide panel can never overflow the viewport edge. */}
-      {/* Fixed 72px: main uses pt-[72px] and the page hero uses -mt-[72px], so
-          the header must be exactly that tall or content sits under it.
-          relative: the mega-menu panel anchors here, not to its trigger. */}
-      <div className="container mx-auto px-6 h-[72px] flex items-center justify-between relative">
+      {/* Height comes from --header-h (globals.css); main offsets content by
+          it and heroes pull up by it, so it stays a single source of truth.
+          relative: the mega-menu panel anchors to this container rather than
+          its trigger, so a wide panel can never overflow the viewport edge. */}
+      <div className="container mx-auto px-6 h-[var(--header-h)] flex items-center justify-between relative">
         <Link href="/" className="flex items-center">
-          <Logo settings={settings} height={30} className="sm:hidden" />
-          <Logo settings={settings} height={36} className="hidden sm:flex" />
+          <Logo settings={settings} height={40} className="sm:hidden" />
+          <Logo settings={settings} height={50} className="hidden sm:flex" />
         </Link>
 
         {/* Desktop navigation */}
@@ -174,7 +173,7 @@ export default function Header({
       >
         <div className="flex items-center justify-between p-4 border-b border-gray-200 sticky top-0 bg-white z-10">
           <Link href="/" onClick={() => setOpen(false)} className="flex items-center">
-            <Logo settings={settings} height={30} />
+            <Logo settings={settings} height={40} />
           </Link>
           <button
             onClick={() => setOpen(false)}

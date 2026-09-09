@@ -16,7 +16,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   return (
     <>
       <Header nav={headerNav.items as NavItem[]} settings={settings} />
-      <main className="pt-[72px]">{children}</main>
+      <main className="pt-[var(--header-h)]">{children}</main>
       <Footer columns={footerNav.items as FooterColumn[]} settings={settings} />
       <RevealInit />
     </>
